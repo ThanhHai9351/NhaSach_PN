@@ -1,0 +1,32 @@
+﻿@model List<NhaSachPN.Models.Favourite>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="main p-3 text-center">
+    <h2 class="text-start">Yêu thích</h2>
+    <div class="row">
+        <h5 class="col-md-6">Sản phẩm</h5>
+        <h5 class="col-md-6">Giá</h5>
+        @foreach (var item in Model)
+        {
+            <hr>
+            <div class="row col-md-6">
+                <div class="col-md-6">
+                    <button class="btn btn-danger">x</button>
+                </div>
+                <div class="col-md-6">
+                    <img class="w-50" src="@item.Product.Image" alt="">
+                </div>
+                <div class="col-md-12 text-center p-3">
+                    <h6>@item.Product.ProductName</h6>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="text-danger">@item.Product.Price</p>
+            </div>
+        }
+    </div>
+</div>
+

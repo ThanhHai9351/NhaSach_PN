@@ -1,0 +1,147 @@
+﻿@model NhaSachPN.Models.Product
+@using NhaSachPN.Models;
+@{ 
+    CompanyDBContext db = new CompanyDBContext();
+    List<Product> products = db.Products.OrderByDescending(row => row.Date).Take(5).ToList();
+    List<Evaluate> evaluates = db.Evalutes.Where(row => row.ProductID == Model.ProductID).ToList(); 
+} 
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="p-3 main" style="border: 1px solid #cdcdcd">
+    <div class="row">
+        <div class="col-md-5">
+            <img class="p-2" style="border: solid 1px #cdcdcd" src="@Model.Image" alt="">
+        </div>
+        <div class="col-md-7 p-3">
+            <h4>@Model.ProductName</h4>
+            <hr>
+            <div class="row">
+                <p class="col-md-8">Nhà phát hành: </p>
+                <h6 class="col-md-4">@Model.Publisher.PublisherName</h6>
+                <p class="col-md-8">Tác giả: </p>
+                <h6 class="col-md-4">@Model.Author.AuthorName</h6>
+            </div>
+            <hr>
+            <p class="text-warning">Viết đánh giá của bạn</p>
+            <hr>
+            <h3 class="text-danger">@Model.Price đ</h3>
+            <div class="row">
+                <p class="col-md-3">Nhà bán hành: </p>
+                <h6 class="col-md-9">Phương Nam</h6>
+                <p class="col-md-3">Số lượng còn lại: </p>
+                <h6 class="col-md-9 text-success">@Model.Quantity sản phẩm</h6>
+                <div class="row">
+                    <p class="col-md-3">Số lượng:</p>
+                    <div class="col-md-9">
+                        <button onclick="decrease()" class="btn btn-secondary">-</button>
+                        <input class="quantity text-center" style="width: 50px; height: 35px" type="text" name="" value="1" placeholder="1" max="@Model.Quantity">
+                        <button onclick="increase()" class="btn btn-secondary">+</button>
+                    </div>
+                </div>
+                <div class="m-2 p-3 row" style="background-color:#cdcdcd">
+                    <div class="col-md-8">
+                        <a class="btn btn-outline-danger" aria-current="page" href="#"><i class="fa-solid fa-heart"></i></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success d-flex">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-cart-shopping"></i></i></a>
+                            <span class="px-2">Chọn mua</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Mô tả sản phẩm
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    Thông tin chi tiết
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Tên sản phẩm: <strong>@Model.ProductName</strong></li>
+                        <li class="list-group-item">Nhà phát hành: <strong>@Model.Publisher.PublisherName</strong></li>
+                        <li class="list-group-item">Tác giả: <strong>@Model.Author.AuthorName</strong></li>
+                        <li class="list-group-item">Giá bán: <strong>@Model.Price</strong></li>
+                        <li class="list-group-item">Số lượng còn lại: <strong>@Model.Quantity</strong></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                    Đánh giá của khách hàng
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    @if (evaluates.Count == 0)
+                    { 
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-danger">Hiện chưa có đánh giá nào với sách</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in evaluates)
+                            {
+                                <li class="list-group-item">@item.ProductEvaluate</li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5">
+        <h4 class="">Có thể bạn cũng thích</h4>
+        <hr>
+        <div class="d-flex m-2">
+            @foreach (var item in products)
+            {
+                <div class="card card-product me-2" style="width: 15rem; height: 26rem">
+                    <img src="@item.Image" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        @if (@item.ProductName.Length > 16)
+                        {
+                            <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
+                                <h6 class="card-title">@item.ProductName.Substring(0, 16) ...</h6>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
+                                <h6 class="card-title">@item.ProductName</h6>
+                            </a>
+                        }
+                        <p class="card-text text-danger">@item.Price</p>
+                        <a href="#" class="btn btn-warning text-white w-100 h-25">CHỌN MUA</a>
+                        <i class="btn btn-outline-danger fa-solid fa-heart mt-2"></i>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
