@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace NhaSachPN.Models
 {
-    public class CompanyDBContext: DbContext
+    public class CompanyDBContext : DbContext
     {
         public CompanyDBContext() : base("MyConnectionString") { }
 
@@ -23,5 +23,9 @@ namespace NhaSachPN.Models
         public DbSet<Favourite> Favourites { get; set; }
 
         public DbSet<PurchaseVoucher> PurchaseVouchers { get; set; }
+
+        public DbSet<Checks> Checks { get; set; }
+
+
     }
 }

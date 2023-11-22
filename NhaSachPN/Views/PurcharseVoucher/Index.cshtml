@@ -1,0 +1,73 @@
+﻿@model List<NhaSachPN.Models.Checks>
+@{
+    int sum = 0;
+    for (int i = 0; i < Model.Count; i++)
+    {
+        Model[i].Total = (int)((int)Model[i].Quantity * Model[i].Product.Price);
+        sum += Model[i].Total;
+    }
+}
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="main p-3 text-center">
+    <h4 class="text-start bg-secondary p-3 text-white">Giỏ hàng</h4>
+    @if (Model.Count > 0)
+    {
+        <div class="row mt-3">
+            <h5 class="col-md-4">Sản phẩm</h5>
+            <h5 class="col-md-3">Giá</h5>
+            <h5 class="col-md-2">Số lượng</h5>
+            <h5 class="col-md-3">Tổng</h5>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <hr>
+                <div class="row col-md-4">
+                    <div class="col-md-6">
+                        <button class="btn btn-danger">x</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="w-75" src="@Model[i].Product.Image" alt="">
+                    </div>
+                    <div class="col-md-12 text-center p-3">
+                        <h6>@Model[i].Product.ProductName</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <p class="text-danger">@Model[i].Product.Price đ</p>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-flex m-auto">
+                        <form action="/PurcharseVoucher/UpdateQuantity" method="get" enctype="multipart/form-data">
+                            <input type="hidden" name="ProductID" value="@Model[i].ProductID" />
+                            <input type="number" style="border-radius: 5px" class="quantity text-center w-50 mx-2 mr-2" min="1" name="Quantity" value="@Model[i].Quantity" />
+                            <button class="btn update" type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <p>@Model[i].Total</p>
+                </div>
+            }
+            <h5 class="text-start m-4 text-primary">Tổng tiền: @sum đ</h5>
+            <form action="/PurcharseVoucher/Pay" method="post">
+                <button type="submit" class="pay btn btn-danger w-25 m-auto">Thanh toán</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <h6>Hiện tại không có sản phẩm nào ở giỏ hàng!!</h6>
+    }
+</div>
+<script>
+    const $ = document.querySelector.bind(document)
+    const $$ = document.querySelectorAll.bind(document)
+
+    $('.pay').addEventListener('click', () => {
+        alert("Bạn đã thanh toán thành công!");
+    })
+</script>
+

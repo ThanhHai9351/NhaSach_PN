@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "NhaSachPN.Models.CompanyDBContext";
         }
 
         protected override void Seed(NhaSachPN.Models.CompanyDBContext context)

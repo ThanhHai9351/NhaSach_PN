@@ -1,10 +1,10 @@
 ﻿@model NhaSachPN.Models.Product
 @using NhaSachPN.Models;
-@{ 
+@{
     CompanyDBContext db = new CompanyDBContext();
     List<Product> products = db.Products.OrderByDescending(row => row.Date).Take(5).ToList();
-    List<Evaluate> evaluates = db.Evalutes.Where(row => row.ProductID == Model.ProductID).ToList(); 
-} 
+    List<Evaluate> evaluates = db.Evalutes.Where(row => row.ProductID == Model.ProductID).ToList();
+}
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
@@ -43,11 +43,11 @@
                 </div>
                 <div class="m-2 p-3 row" style="background-color:#cdcdcd">
                     <div class="col-md-8">
-                        <a class="btn btn-outline-danger" aria-current="page" href="#"><i class="fa-solid fa-heart"></i></i></a>
+                        <a class="btn btn-outline-danger" aria-current="page" href="/Favourite/Create/@Model.ProductID"><i class="fa-solid fa-heart"></i></i></a>
                     </div>
                     <div class="col-md-4">
                         <button class="btn btn-success d-flex">
-                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-cart-shopping"></i></i></a>
+                            <a class="nav-link active" aria-current="page" href="/PurcharseVoucher/Create/@Model.ProductID"><i class="fa-solid fa-cart-shopping"></i></i></a>
                             <span class="px-2">Chọn mua</span>
                         </button>
                     </div>
@@ -96,7 +96,7 @@
             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                 <div class="accordion-body">
                     @if (evaluates.Count == 0)
-                    { 
+                    {
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-danger">Hiện chưa có đánh giá nào với sách</li>
                         </ul>
@@ -136,8 +136,10 @@
                             </a>
                         }
                         <p class="card-text text-danger">@item.Price</p>
-                        <a href="#" class="btn btn-warning text-white w-100 h-25">CHỌN MUA</a>
-                        <i class="btn btn-outline-danger fa-solid fa-heart mt-2"></i>
+                        <a href="/PurcharseVoucher/Create/@item.ProductID" class="btn btn-warning text-white w-100 h-25">CHỌN MUA</a>
+                        <a href="/Favourite/Create/@item.ProductID">
+                            <i class="btn btn-outline-danger fa-solid fa-heart mt-2"></i>
+                        </a>
                     </div>
                 </div>
             }

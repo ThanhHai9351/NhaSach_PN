@@ -13,9 +13,9 @@ namespace NhaSachPN.Models
 
         public Nullable<long> ProductID { get; set; }
 
-        public long Quantity { get; set; }
+        public int Quantity { get; set; }
 
-        public long Money { get; set; }
+        public int Money { get; set; }
 
         public virtual Product Product { get; set; } 
     }

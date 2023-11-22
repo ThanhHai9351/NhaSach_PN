@@ -1,6 +1,6 @@
 ﻿@model List<NhaSachPN.Models.Product>
 @using NhaSachPN.Models;
-@{ 
+@{
     CompanyDBContext db = new CompanyDBContext();
     List<Category> categories = db.Categories.ToList();
     List<Author> authors = db.Authors.ToList();
@@ -73,19 +73,21 @@
                         <div class="card-body">
                             @if (@item.ProductName.Length > 16)
                             {
-                            <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
-                                <h6 class="card-title">@item.ProductName.Substring(0, 16) ...</h6>
-                            </a>
+                                <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
+                                    <h6 class="card-title">@item.ProductName.Substring(0, 16) ...</h6>
+                                </a>
                             }
                             else
                             {
-                            <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
-                                <h6 class="card-title">@item.ProductName</h6>
-                            </a>
+                                <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
+                                    <h6 class="card-title">@item.ProductName</h6>
+                                </a>
                             }
                             <p class="card-text text-danger">@item.Price đ</p>
                             <a href="#" class="btn btn-warning text-white w-100 h-25">CHỌN MUA</a>
-                            <i class="btn btn-outline-danger fa-solid fa-heart mt-2"></i>
+                            <a href="/Favourite/Create/@item.ProductID">
+                                <i class="btn btn-outline-danger fa-solid fa-heart mt-2"></i>
+                            </a>
                         </div>
                     </div>
                 }

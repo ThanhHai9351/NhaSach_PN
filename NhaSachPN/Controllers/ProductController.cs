@@ -11,19 +11,19 @@ namespace NhaSachPN.Controllers
     {
         public string Search = "";
         // GET: Product
-        public ActionResult Index(string search = "", int ?rangePrice = 0, int page = 1,int ?cateID = 0,int ?authorID = 0, int ?publisherID = 0,
-            int ?sortPrice = 0,int ?sortName = 0, int ?sortNew = 0 )
+        public ActionResult Index(string search = "", int? rangePrice = 0, int page = 1, int? cateID = 0, int? authorID = 0, int? publisherID = 0,
+            int? sortPrice = 0, int? sortName = 0, int? sortNew = 0)
         {
             Search = search;
             CompanyDBContext db = new CompanyDBContext();
             List<Product> pro = db.Products.ToList();
             long maxPrice = 0;
             List<Product> products = db.Products.Where(row => row.ProductName.Contains(search)).ToList();
-            if(rangePrice > 0)
+            if (rangePrice > 0)
             {
                 products = products.Where(row => row.Price < rangePrice).ToList();
             }
-            if(cateID > 0)
+            if (cateID > 0)
             {
                 products = products.Where(row => row.CategoryID == cateID).ToList();
             }
@@ -31,19 +31,19 @@ namespace NhaSachPN.Controllers
             {
                 products = products.Where(row => row.AuthorID == authorID).ToList();
             }
-            if(publisherID>0)
+            if (publisherID > 0)
             {
                 products = products.Where(row => row.PublisherID == publisherID).ToList();
-            }    
+            }
             foreach (var item in pro)
             {
-                if(item.Price > maxPrice)
+                if (item.Price > maxPrice)
                 {
                     maxPrice = (long)item.Price;
-                }    
+                }
             }
             ViewBag.MAX = maxPrice;
-            if(rangePrice > 0)
+            if (rangePrice > 0)
             {
                 ViewBag.PRICE = rangePrice;
             }
@@ -51,7 +51,7 @@ namespace NhaSachPN.Controllers
             {
                 ViewBag.PRICE = maxPrice;
             }
-            if(sortPrice == 1)
+            if (sortPrice == 1)
             {
                 products = products.OrderBy(row => row.Price).ToList();
             }
