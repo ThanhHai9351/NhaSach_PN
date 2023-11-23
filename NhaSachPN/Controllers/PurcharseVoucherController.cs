@@ -41,6 +41,14 @@ namespace NhaSachPN.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Remove(int id)
+        {
+            CompanyDBContext db = new CompanyDBContext();
+            Checks chks = db.Checks.Where(row => row.ProductID == id).FirstOrDefault();
+            db.Checks.Remove(chks);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult Pay()
         {
             CompanyDBContext db = new CompanyDBContext();

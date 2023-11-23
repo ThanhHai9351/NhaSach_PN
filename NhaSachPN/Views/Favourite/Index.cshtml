@@ -5,9 +5,9 @@
 }
 
 <div class="main p-3 text-center">
+    <h4 class="text-start bg-secondary p-3 text-white">Yêu thích</h4>
     @if (Model.Count > 0)
     {
-        <h4 class="text-start bg-secondary p-3 text-white">Yêu thích</h4>
         <div class="row mt-3">
             <h5 class="col-md-6">Sản phẩm</h5>
             <h5 class="col-md-6">Giá</h5>
@@ -16,7 +16,9 @@
                 <hr>
                 <div class="row col-md-6">
                     <div class="col-md-6">
-                        <button class="btn btn-danger"><a class="text-white text-decoration-none" href="/Favourite/Delete/@item.ID">X</a></button>
+                        <button class="btn btn-danger">
+                            <a class="text-white text-decoration-none" href="/Favourite/Delete/@item.ID">X</a>
+                        </button>
                     </div>
                     <div class="col-md-6">
                         <img class="w-50" src="@item.Product.Image" alt="">
@@ -33,7 +35,7 @@
     }
     else
     {
-        <h2 class="text-start">Bạn chưa thích sản phẩm nào</h2>
+        <h6 class="text-center">Bạn chưa thích sản phẩm nào</h6>
     }
 </div>
 

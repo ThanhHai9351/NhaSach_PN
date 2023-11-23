@@ -132,13 +132,17 @@
                 <div class="card card-product me-2" style="width: 15rem; height: 26rem">
                     <img src="@item.Image" class="card-img-top" alt="...">
                     <div class="card-body">
-                        @if (@item.ProductName.Length > 20)
+                        @if (@item.ProductName.Length > 16)
                         {
-                            <h6 class="card-title">@item.ProductName.Substring(0, 20) ...</h6>
+                            <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
+                                <h6 class="card-title">@item.ProductName.Substring(0, 16) ...</h6>
+                            </a>
                         }
                         else
                         {
-                            <h6 class="card-title">@item.ProductName</h6>
+                            <a href="/Product/Detail/@item.ProductID" style="text-decoration: none; color: #000">
+                                <h6 class="card-title">@item.ProductName</h6>
+                            </a>
                         }
                         <p class="card-text text-danger">@item.Price đ</p>
                         <a href="#" class="btn btn-warning text-white w-100 h-25">CHỌN MUA</a>
