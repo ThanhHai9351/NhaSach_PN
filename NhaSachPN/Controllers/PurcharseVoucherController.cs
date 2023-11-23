@@ -56,6 +56,8 @@ namespace NhaSachPN.Controllers
             }
             foreach (var item in lvChks)
             {
+                Product pro = db.Products.Where(row => row.ProductID == item.ProductID).FirstOrDefault();
+                pro.Quantity = pro.Quantity - item.Quantity;
                 db.Checks.Remove(item);
             }
             db.SaveChanges();
