@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NhaSachPN.Models;
+using NhaSachPN.Filters;
 
 namespace NhaSachPN.Controllers
 {
@@ -49,6 +50,8 @@ namespace NhaSachPN.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [MyAuthenFilter]
         public ActionResult Pay()
         {
             CompanyDBContext db = new CompanyDBContext();

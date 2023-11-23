@@ -1,0 +1,20 @@
+﻿@model List<NhaSachPN.Models.Author>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Author</h2>
+<table class="table">
+    <tr>
+        <th>Author ID</th>
+        <th>Author Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.AuthorName</td>
+        </tr>
+    }
+</table>
+

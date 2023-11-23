@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using NhaSachPN.ViewModel;
 using NhaSachPN.Identity;
+using NhaSachPN.Filters;
 
 namespace NhaSachPN.Controllers
 {
@@ -75,7 +76,14 @@ namespace NhaSachPN.Controllers
                 var authenManager = HttpContext.GetOwinContext().Authentication;
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenManager.SignIn(new AuthenticationProperties(), userIdentity);
-                return RedirectToAction("Index", "Home");
+                if (userManager.IsInRole(user.Id, "Admin"))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {

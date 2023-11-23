@@ -20,6 +20,7 @@ namespace NhaSachPN
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login")
             });
+            this.CreateRolesAndUsers();
         }
 
         public void CreateRolesAndUsers()
@@ -57,7 +58,6 @@ namespace NhaSachPN
                 role.Name = "Manager";
                 roleManager.Create(role);
             }
-
             if (userManager.FindByName("manager") == null)
             {
                 var user = new AppUser();
