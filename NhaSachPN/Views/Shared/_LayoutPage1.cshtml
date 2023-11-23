@@ -86,6 +86,23 @@
                         <a class="nav-link active" aria-current="page" href="/PurcharseVoucher/Index"><i class="fa-solid fa-cart-shopping"></i></i></a>
                     </li>
                 </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="text-danger">
+                        Hello @User.Identity.Name
+                    </div>
+                }
+                @{ if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Account/Logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login">Login</a>
+                        <a href="/Account/Register">Register</a>
+                    }
+                }
+
             </div>
         </div>
     </nav>
