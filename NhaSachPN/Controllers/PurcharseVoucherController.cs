@@ -69,10 +69,14 @@ namespace NhaSachPN.Controllers
             {
                 Product pro = db.Products.Where(row => row.ProductID == item.ProductID).FirstOrDefault();
                 pro.Quantity = pro.Quantity - item.Quantity;
+                Evaluate evaluate = new Evaluate();
+                evaluate.ProductID = item.ProductID;
+                evaluate.ProductEvaluate = "...";
+                db.Evalutes.Add(evaluate);
                 db.Checks.Remove(item);
             }
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Evaluate");
         }
     }
 }

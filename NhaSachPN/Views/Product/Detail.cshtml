@@ -16,7 +16,7 @@
             <img class="p-2" style="border: solid 1px #cdcdcd" src="@Model.Image" alt="">
         </div>
         <div class="col-md-7 p-3">
-            <h4>@Model.ProductName</h4>
+            <h3 class="p-3 bg-secondary text-white">@Model.ProductName</h3>
             <hr>
             <div class="row">
                 <p class="col-md-8">Nhà phát hành: </p>
@@ -33,14 +33,6 @@
                 <h6 class="col-md-9">Phương Nam</h6>
                 <p class="col-md-3">Số lượng còn lại: </p>
                 <h6 class="col-md-9 text-success">@Model.Quantity sản phẩm</h6>
-                <div class="row">
-                    <p class="col-md-3">Số lượng:</p>
-                    <div class="col-md-9">
-                        <button onclick="decrease()" class="btn btn-secondary">-</button>
-                        <input class="quantity text-center" style="width: 50px; height: 35px" type="text" name="" value="1" placeholder="1" max="@Model.Quantity">
-                        <button onclick="increase()" class="btn btn-secondary">+</button>
-                    </div>
-                </div>
                 <div class="m-2 p-3 row" style="background-color:#cdcdcd">
                     <div class="col-md-8">
                         <a class="btn btn-outline-danger" aria-current="page" href="/Favourite/Create/@Model.ProductID"><i class="fa-solid fa-heart"></i></i></a>
