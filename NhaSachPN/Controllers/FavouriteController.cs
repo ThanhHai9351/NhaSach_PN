@@ -8,6 +8,7 @@ using NhaSachPN.Filters;
 
 namespace NhaSachPN.Controllers
 {
+
     public class FavouriteController : Controller
     {
         // GET: Favourite

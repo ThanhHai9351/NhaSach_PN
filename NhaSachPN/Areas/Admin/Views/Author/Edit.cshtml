@@ -1,0 +1,38 @@
+﻿@model NhaSachPN.Models.Author
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="m-3 p-3 bg-secondary text-white">Edit</h2>
+
+@using (Html.BeginForm("Edit","Author",FormMethod.Post,new { area = "Admin"}))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal w-50 m-auto p-3" style="border: 1px solid #cdcdcd">
+    <h4>Author</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AuthorName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AuthorName, new { htmlAttributes = new { @class = "form-control mt-3" } })
+            @Html.ValidationMessageFor(model => model.AuthorName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary mt-3" />
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+}
+
+

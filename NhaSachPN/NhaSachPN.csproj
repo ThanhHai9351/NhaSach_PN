@@ -138,11 +138,24 @@
     <Content Include="Areas\Admin\Views\Author\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Publisher\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Publisher\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Publisher\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PurcharseVoucher\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PurcharseVoucher\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PurcharseVoucher\Create.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +164,8 @@
     <Compile Include="Areas\Admin\Controllers\AuthorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PublisherController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PurcharseVoucherController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EvaluateController.cs" />
     <Compile Include="Controllers\FavouriteController.cs" />
