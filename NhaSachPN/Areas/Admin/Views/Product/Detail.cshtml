@@ -1,0 +1,46 @@
+﻿@model NhaSachPN.Models.Product
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2 class="p-3 bg-secondary text-white">Detail</h2>
+
+<table class="table w-75 m-auto">
+    <tr>
+        <th>Product ID</th>
+        <td>@Model.ProductID</td>
+    </tr>
+    <tr>
+        <th>Product Name</th>
+        <td>@Model.ProductName</td>
+    </tr>
+    <tr>
+        <th>Quantity</th>
+        <td>@Model.Quantity</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <th>Decription</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td>@Model.Category.CategoryName</td>
+    </tr>
+    <tr>
+        <th>Pubisher</th>
+        <td>@Model.Publisher.PublisherName</td>
+    </tr>
+    <tr>
+        <th>Author</th>
+        <td>@Model.Author.AuthorName</td>
+    </tr>
+    <tr>
+        <th>Image</th>
+        <td><img class="w-50" src="@Model.Image" alt="Alternate Text" /></td>
+    </tr>
+</table>
+

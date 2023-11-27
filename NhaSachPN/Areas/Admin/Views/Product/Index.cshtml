@@ -3,18 +3,78 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Product</h2>
-<table class="table">
-    <tr>
-        <th>Product ID</th>
-        <th>Product Name</th>
-    </tr>
-    @foreach(var item in Model)
+<div class=" m-auto p-3">
+    <h2 class="p-3 bg-secondary text-white">Product</h2>
+    <div class="d-flex">
+        <a class="btn btn-outline-info" href="/Admin/Product/Create">Create Product</a>
+        @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "d-flex mx-3", area = "Admin" }))
+        {
+            <div class="input-group">
+                <input class="form-control bg-outline-success me-2" value="@ViewBag.Search" type="search" name="search" placeholder="Tìm kiếm theo tên ..." aria-label="Search">
+                <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        }
+    </div>
+    <table class="table mt-4 m-3 w-75 m-auto">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Category</th>
+            <th>Function</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductID</td>
+                <td><a class="text-decoration-none" href="/Admin/Product/Detail/@item.ProductID">@item.ProductName</a></td>
+                <td>@item.Price</td>
+                <td>@item.Author.AuthorName</td>
+                <td>@item.Publisher.PublisherName</td>
+                <td>@item.Category.CategoryName</td>
+                <td>
+                    <a class="text-decoration-none text-warning mr-2" href="/Admin/Product/Edit/@item.ProductID">Edit</a> -
+                    <a class="text-decoration-none text-danger" href="/Admin/Product/Delete/@item.ProductID">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+    @{
+        int prevPage = ViewBag.Page - 1;
+        int nextPage = ViewBag.Page + 1;
+        if (prevPage < 0)
+        {
+            prevPage = 1;
+        }
+        if (nextPage > ViewBag.SoTrang)
+        {
+            nextPage = ViewBag.SoTrang;
+        }
+    }
+    <ul class="pagination justify-content-center mt-3">
+        <li class="page-item">
+            <a class="page-link" href="/Admin/Product/Index?search=@ViewBag.Search&page=@prevPage">Prev</a>
+        </li>
+        @for (int i = 1; i <= ViewBag.SoTrang; i++)
+        {
+            if (i == ViewBag.Page)
             {
-                <tr>
-                    <td>@item.ProductID</td>
-                    <td>@item.ProductName</td>
-                </tr>
+                <li class="page-item">
+                    <a class="page-link active " href="/Admin/Product/Index?search=@ViewBag.Search&page=@i">@i</a>
+                </li>
             }
-</table>
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link " href="/Admin/Product/Index?search=@ViewBag.Search&page=@i">@i</a>
+                </li>
+            }
+        }
+        <li class="page-item">
+            <a class="page-link active" href="/Admin/Product/Index?search=@ViewBag.Search&page=@nextPage">Next</a>
+        </li>
+    </ul>
+</div>
 
