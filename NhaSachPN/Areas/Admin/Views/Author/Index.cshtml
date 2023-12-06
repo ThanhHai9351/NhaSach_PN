@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<button type="button" class="btnGetAuthors">Get Authors</button>
 <div class=" m-auto p-3">
     <h2 class="p-3 bg-secondary text-white">Author</h2>
     <div class="d-flex">
@@ -15,13 +15,13 @@
             </div>
         }
     </div>
-    <table class="table mt-4 m-3 w-75 m-auto">
+    <table class="table mt-4 m-3 w-75 m-auto authorTable">
         <tr>
             <th>Author ID</th>
             <th>Author Name</th>
             <th>Function</th>
         </tr>
-        @foreach (var item in Model)
+        @*@foreach (var item in Model)
         {
             <tr>
                 <td>@item.ID</td>
@@ -31,7 +31,7 @@
                     <a class="text-decoration-none text-danger" href="/Admin/Author/Delete/@item.ID">Delete</a>
                 </td>
             </tr>
-        }
+        }*@
     </table>
     @{
         int prevPage = ViewBag.Page - 1;
@@ -70,3 +70,42 @@
     </ul>
 </div>
 
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function ($) {
+        $('.btnGetAuthors').click(() => {
+            $.ajax({
+                type: 'GET',
+                url: '/api/Author',
+                success: (response) => {
+                    for (var i = 0; i <= response.length; i++) {
+                        const authorRow = response[i];
+                        const strHTML = '<tr><td>' + authorRow.ID + '</td><td>' + authorRow.AuthorName + '</td></tr>';
+                        $('.authorTable').append(strHTML);
+                    }
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            });
+        });
+    });
+
+    //$('.btnGetAuthors').click(() => {
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: '/api/Author',
+    //        success: (response) => {
+    //            for (var i = 0; i <= response.length; i++) {
+    //                const authorRow = response[i];
+    //                const strHTML = '<tr><td>' + authorRow.ID + '</td><td>' + authorRow.AuthorName + '</td></tr>';
+    //                $('.authorTable').append(strHTML);
+    //            }
+    //        },
+    //        error: (err) => {
+    //            console.log(err);
+    //        }
+    //    });
+    //});
+
+</script>
